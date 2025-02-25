@@ -1,5 +1,5 @@
-import SharedNotificationSettings from "@/components/SharedNotificationSettings";
-import React from "react";
+import SharedNotificationSettings from '@/components/SharedNotificationSettings';
+import React from 'react';
 
 const TeacherSettings = () => {
   return (

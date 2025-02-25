@@ -1,5 +1,5 @@
-/* import { Request, Response } from "express";
-import { clerkClient } from "../index";
+import { Request, Response } from 'express';
+import { clerkClient } from '../index';
 
 export const updateUser = async (
   req: Request,
@@ -15,9 +15,8 @@ export const updateUser = async (
       },
     });
 
-    res.json({ message: "User updated successfully", data: user });
+    res.json({ message: 'User updated successfully', data: user });
   } catch (error) {
-    res.status(500).json({ message: "Error updating user", error });
+    res.status(500).json({ message: 'Error updating user', error });
   }
 };
- */

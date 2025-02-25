@@ -1,15 +1,15 @@
-/* import Stripe from "stripe";
-import dotenv from "dotenv";
-import { Request, Response } from "express";
-import Course from "../models/courseModel";
-import Transaction from "../models/transactionModel";
-import UserCourseProgress from "../models/userCourseProgressModel";
+import Stripe from 'stripe';
+import dotenv from 'dotenv';
+import { Request, Response } from 'express';
+import Course from '../models/courseModel';
+import Transaction from '../models/transactionModel';
+import UserCourseProgress from '../models/userCourseProgressModel';
 
 dotenv.config();
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error(
-    "STRIPE_SECRET_KEY os required but was not found in env variables"
+    'STRIPE_SECRET_KEY os required but was not found in env variables'
   );
 }
 
@@ -23,15 +23,15 @@ export const listTransactions = async (
 
   try {
     const transactions = userId
-      ? await Transaction.query("userId").eq(userId).exec()
+      ? await Transaction.query('userId').eq(userId).exec()
       : await Transaction.scan().exec();
 
     res.json({
-      message: "Transactions retrieved successfully",
+      message: 'Transactions retrieved successfully',
       data: transactions,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving transactions", error });
+    res.status(500).json({ message: 'Error retrieving transactions', error });
   }
 };
 
@@ -48,15 +48,15 @@ export const createStripePaymentIntent = async (
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
-      currency: "usd",
+      currency: 'usd',
       automatic_payment_methods: {
         enabled: true,
-        allow_redirects: "never",
+        allow_redirects: 'never',
       },
     });
-
+    console.log('created payment intent', paymentIntent);
     res.json({
-      message: "",
+      message: '',
       data: {
         clientSecret: paymentIntent.client_secret,
       },
@@ -64,7 +64,7 @@ export const createStripePaymentIntent = async (
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error creating stripe payment intent", error });
+      .json({ message: 'Error creating stripe payment intent', error });
   }
 };
 
@@ -117,7 +117,7 @@ export const createTransaction = async (
     );
 
     res.json({
-      message: "Purchased Course successfully",
+      message: 'Purchased Course successfully',
       data: {
         transaction: newTransaction,
         courseProgress: initialProgress,
@@ -126,7 +126,6 @@ export const createTransaction = async (
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error creating transaction and enrollment", error });
+      .json({ message: 'Error creating transaction and enrollment', error });
   }
 };
- */

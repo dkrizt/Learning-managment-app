@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BaseQueryApi, FetchArgs } from '@reduxjs/toolkit/query';
 import { User } from '@clerk/nextjs/server';
 import { Clerk } from '@clerk/clerk-js';
-// import { toast } from "sonner";
+import { toast } from 'sonner';
 
 const customBaseQuery = async (
   args: string | FetchArgs,
@@ -22,7 +22,7 @@ const customBaseQuery = async (
 
   try {
     const result: any = await baseQuery(args, api, extraOptions);
-
+    console.log('result print: ', result);
     if (result.error) {
       const errorData = result.error.data;
       const errorMessage =
