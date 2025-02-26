@@ -22,7 +22,7 @@ const customBaseQuery = async (
 
   try {
     const result: any = await baseQuery(args, api, extraOptions);
-    console.log('result print: ', result);
+
     if (result.error) {
       const errorData = result.error.data;
       const errorMessage =
