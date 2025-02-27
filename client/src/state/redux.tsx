@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import globalReducer from "@/state";
-import { api } from "@/state/api";
+import { useRef } from 'react';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import globalReducer from '@/state';
+import { api } from '@/state/api';
 
 /* REDUX STORE */
 const rootReducer = combineReducers({
@@ -21,22 +21,22 @@ export const makeStore = () => {
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [
-            "api/executeMutation/pending",
-            "api/executeMutation/fulfilled",
-            "api/executeMutation/rejected",
+            'api/executeMutation/pending',
+            'api/executeMutation/fulfilled',
+            'api/executeMutation/rejected',
           ],
           ignoredActionPaths: [
-            "meta.arg.originalArgs.file",
-            "meta.arg.originalArgs.formData",
-            "payload.chapter.video",
-            "meta.baseQueryMeta.request",
-            "meta.baseQueryMeta.response",
+            'meta.arg.originalArgs.file',
+            'meta.arg.originalArgs.formData',
+            'payload.chapter.video',
+            'meta.baseQueryMeta.request',
+            'meta.baseQueryMeta.response',
           ],
           ignoredPaths: [
-            "global.courseEditor.sections",
-            "entities.videos.data",
-            "meta.baseQueryMeta.request",
-            "meta.baseQueryMeta.response",
+            'global.courseEditor.sections',
+            'entities.videos.data',
+            'meta.baseQueryMeta.request',
+            'meta.baseQueryMeta.response',
           ],
         },
       }).concat(api.middleware),
@@ -45,8 +45,8 @@ export const makeStore = () => {
 
 /* REDUX TYPES */
 export type AppStore = ReturnType<typeof makeStore>;
-export type RootState = ReturnType<AppStore["getState"]>;
-export type AppDispatch = AppStore["dispatch"];
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -56,7 +56,7 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const storeRef = useRef<AppStore>();
+  const storeRef = useRef<AppStore | null>(null);
   if (!storeRef.current) {
     storeRef.current = makeStore();
     setupListeners(storeRef.current.dispatch);
